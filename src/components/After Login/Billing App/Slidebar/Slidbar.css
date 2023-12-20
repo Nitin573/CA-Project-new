@@ -1,0 +1,6 @@
+.btn{
+    transition: 3s;
+}
+.btn:active{
+    transform:rotate(180deg)
+}

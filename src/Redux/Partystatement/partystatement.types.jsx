@@ -1,0 +1,7 @@
+
+export const LOADING_PARTIES_STATEMENT = "partystatement/LOADING_PARTIES_STATEMENT";
+export const GET_PARTIES_STATEMENT = "partystatement/GET_PARTIES_STATEMENT";
+export const ERROR_PARTIES_STATEMENT = "partystatement/ERROR_PARTIES_STATEMENT";
+export const GET_INDIVIDUAL_PARTIES_STATEMENT = "partystatement/GET_INDIVIDUAL_PARTIES_STATEMENT";
+export const SET_PARTY_ID = "partystatement/SET_PARTY_ID";
+export const GET_TRANSACTIONS_FULFILLED = "partystatement/GET_TRANSACTIONS_FULFILLED";

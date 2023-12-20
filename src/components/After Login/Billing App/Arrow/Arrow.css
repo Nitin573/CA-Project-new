@@ -1,0 +1,51 @@
+
+.arrow {
+    position: relative;
+    width: 0;
+    height: 0;
+    margin: 10px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.arrow__body {
+    position: absolute;
+    bottom: 0;
+    left: -10px;
+    width: 20px;
+    height: 30px;
+    background-color: black;
+}
+
+.arrow__head {
+    position: absolute;
+    bottom: 30px;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid black;
+}
+
+.arrow.up {
+    transform: rotate(180deg);
+}
+
+.arrow.up .arrow__body {
+    top: 0;
+    bottom: auto;
+}
+
+.arrow.up .arrow__head {
+    top: 30px;
+    bottom: auto;
+    border-bottom: none;
+    border-top: 10px solid black;
+}
+
+.arrow.down:hover {
+    transform: translateY(-5px);
+}

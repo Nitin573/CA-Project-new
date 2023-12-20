@@ -1,0 +1,9 @@
+export const LOADING_SALE_REPORT="parties/LOADING_SALE_REPORT";
+export const SUCCESS_SALE_REPORT="parties/SUCCESS_SALE_REPORT";
+export const ERROR_SALE_REPORT="parties/ERROR_SALE_REPORT";
+
+export const GET_SALE_REPORT="parties/GET_SALE_REPORT";
+export const UPDATE_SALE_REPORT="parties/UPDATE_SALE_REPORT";
+export const DELETE_SALE_REPORT="parties/DELETE_SALE_REPORT";
+
+

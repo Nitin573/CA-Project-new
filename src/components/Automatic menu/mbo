@@ -1,0 +1,263 @@
+//2
+
+
+// import React, { useState } from 'react';
+
+// const MenuBar = () => {
+//     const [activeMenu, setActiveMenu] = useState('menu1');
+
+//     const handleMenuClick = (menu) => {
+//         setActiveMenu(menu);
+//     };
+
+//     return (
+//         <div>
+//             <div className="menu-bar">
+//                 <button className={activeMenu === 'menu1' ? 'active' : ''} onClick={() => handleMenuClick('menu1')}>
+//                     Menu 1
+//                 </button>
+//                 <button className={activeMenu === 'menu2' ? 'active' : ''} onClick={() => handleMenuClick('menu2')}>
+//                     Menu 2
+//                 </button>
+//                 <button className={activeMenu === 'menu3' ? 'active' : ''} onClick={() => handleMenuClick('menu3')}>
+//                     Menu 3
+//                 </button>
+//             </div>
+//             <div className="content-box">
+//                 {activeMenu === 'menu1' && <div style={{ color: 'red' }}>Content for menu 1</div>}
+//                 {activeMenu === 'menu2' && <div style={{ color: 'green' }}>Content for menu 2</div>}
+//                 {activeMenu === 'menu3' && <div style={{ color: 'blue' }}>Content for menu 3</div>}
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default MenuBar;
+
+
+
+////3
+
+// {
+// import React, { useState } from 'react';
+
+// const MenuBar = () => {
+//     const [activeMenu, setActiveMenu] = useState('menu1');
+
+//     const handleMenuClick = (menu) => {
+//         setActiveMenu(menu);
+//     };
+
+//     return (
+//         <div>
+//             <div className="menu-bar">
+//                 <button className={activeMenu === 'menu1' ? 'active' : ''} onClick={() => handleMenuClick('menu1')}>
+//                     Menu 1
+//                 </button>
+//                 <button className={activeMenu === 'menu2' ? 'active' : ''} onClick={() => handleMenuClick('menu2')}>
+//                     Menu 2
+//                 </button>
+//                 <button className={activeMenu === 'menu3' ? 'active' : ''} onClick={() => handleMenuClick('menu3')}>
+//                     Menu 3
+//                 </button>
+//             </div>
+//             <div className="content-box">
+//                 {activeMenu === 'menu1' && <p>Content for menu 1</p>}
+//                 {activeMenu === 'menu2' && <p>Content for menu 2</p>}
+//                 {activeMenu === 'menu3' && <p>Content for menu 3</p>}
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default MenuBar;}
+
+///4
+
+
+
+//5
+
+// {import React, { useState, useEffect } from "react";
+
+// const MenuBar = () => {
+//     const menuItems = [
+//         {
+//             title: "Menu 1",
+//             content: "This is menu 1 content",
+//             color: "red",
+//         },
+//         {
+//             title: "Menu 2",
+//             content: "This is menu 2 content",
+//             color: "green",
+//         },
+//         {
+//             title: "Menu 3",
+//             content: "This is menu 3 content",
+//             color: "blue",
+//         },
+//     ];
+
+//     const [activeMenu, setActiveMenu] = useState(0);
+//     const [currentTime, setCurrentTime] = useState(new Date());
+
+//     useEffect(() => {
+//         // Update current time every second
+//         const timer = setInterval(() => {
+//             setCurrentTime(new Date());
+//         }, 1000);
+//         return () => clearInterval(timer);
+//     }, []);
+
+//     const handleClick = (index) => {
+//         setActiveMenu(index);
+//     };
+
+//     return (
+//         <div>
+//             <div style={{ display: "flex" }}>
+//                 {menuItems.map((item, index) => (
+//                     <div
+//                         key={index}
+//                         style={{
+//                             padding: "10px",
+//                             marginRight: "10px",
+//                             cursor: "pointer",
+//                             backgroundColor: index === activeMenu ? item.color : "",
+//                         }}
+//                         onClick={() => handleClick(index)}
+//                     >
+//                         {item.title}
+//                     </div>
+//                 ))}
+//             </div>
+//             <div style={{ marginTop: "20px", backgroundColor: menuItems[activeMenu].color }}>
+//                 <h2>{menuItems[activeMenu].title}</h2>
+//                 <p>{menuItems[activeMenu].content}</p>
+//                 <p>Current time: {currentTime.toLocaleTimeString()}</p>
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default MenuBar;
+// }
+
+///6
+
+
+///good
+
+// {import React, { useState, useEffect } from 'react';
+// import "./styles.css"
+// const menuItems = [
+//     { id: 1, label: 'Home' },
+//     { id: 2, label: 'About' },
+//     { id: 3, label: 'Contact' },
+// ];
+
+// const MenuBar = () => {
+    
+//     const [activeMenu, setActiveMenu] = useState(menuItems[0].id);
+//     const [currentTime, setCurrentTime] = useState(new Date());
+
+//     useEffect(() => {
+//         const intervalId = setInterval(() => setCurrentTime(new Date()), 1000);
+//         return () => clearInterval(intervalId);
+//     }, []);
+
+//     const handleMenuClick = (id) => {
+//         setActiveMenu(id);
+//     };
+
+//     const renderContent = () => {
+//         switch (activeMenu) {
+//             case 1:
+//                 return <div>Home Content</div>;
+//             case 2:
+//                 return <div>About Content</div>;
+//             case 3:
+//                 return <div>Contact Content</div>;
+//             default:
+//                 return null;
+//         }
+//     };
+
+//     return (
+//         <div>
+//             <div className="menu-bar">
+//                 {menuItems.map((menuItem) => (
+//                     <div
+//                         key={menuItem.id}
+//                         className={`menu-item ${activeMenu === menuItem.id ? 'active' : ''
+//                             }`}
+//                         onClick={() => handleMenuClick(menuItem.id)}
+//                     >
+//                         {menuItem.label}
+//                     </div>
+//                 ))}
+//             </div>
+//             <div className="content-box">{renderContent()}</div>
+            
+//         </div>
+//     );
+// };
+
+// export default MenuBar;
+//}
+
+
+
+//7
+
+// good
+
+// {import React, { useState, useEffect } from "react";
+
+// const MenuBar = () => {
+//     const [activeMenu, setActiveMenu] = useState(0);
+//     const [content, setContent] = useState("");
+
+//     // array of menu items
+//     const menuItems = ["Home", "About", "Services", "Contact"];
+
+//     // array of content items
+//     const contentItems = ["Welcome to our homepage!", "Learn more about our company.", "See what services we offer.", "Contact us for more information."];
+
+//     // function to change content based on active menu
+//     const changeContent = (menuIndex) => {
+//         setActiveMenu(menuIndex);
+//         setContent(contentItems[menuIndex]);
+//     };
+
+//     // function to change active menu with time
+//     useEffect(() => {
+//         const interval = setInterval(() => {
+//             setActiveMenu((activeMenu + 1) % menuItems.length);
+//         }, 5000);
+
+//         return () => clearInterval(interval);
+//     }, [activeMenu]);
+
+//     return (
+//         <div>
+//             <ul>
+//                 {menuItems.map((menuItem, index) => (
+//                     <li
+//                         key={index}
+//                         onClick={() => changeContent(index)}
+//                         style={{
+//                             background: activeMenu === index ? "red" : "white"
+//                         }}
+//                     >
+//                         {menuItem}
+//                     </li>
+//                 ))}
+//             </ul>
+//             <div>{content}</div>
+//         </div>
+//     );
+// };
+
+// export default MenuBar;}

@@ -1,0 +1,146 @@
+.ContanerForHome6Content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 1%;
+    padding-top: 3%;
+    margin-top: 5%;
+    background-color: rgb(241, 242, 243);
+}
+
+.sidebarForHome6Content {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    padding-left: 2%;
+    padding-right: 1%;
+    width: 20%;
+    font-size: 100%;
+}
+
+.middleSectionForHome6Content {
+    display: flex;
+    flex-direction: column;
+    width: 54%;
+    padding: 1%;
+    padding-right: 3%;
+}
+
+.rightBoxForForm {
+    display: flex;
+    width: 26%;
+    justify-content: center;
+}
+
+.Box_for_form {
+    height: fit-content;
+    position: sticky;
+    top: 2%;
+    padding: 5%;
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    border-radius: 10px;
+}
+
+.BoxoSidebarItems {
+    position: sticky;
+    top: 2%;
+    font-weight: 500;
+}
+
+.WithoutAccorionContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.AccorionContainer {
+    display: none;
+}
+
+@media all and (min-width: 786px) and (max-width: 950px) {
+    .sidebarForHome6Content {
+        font-size: 80%;
+    }
+
+    .middleSectionForHome6Content {
+        width: 50%;
+    }
+
+    .rightBoxForForm {
+        width: 30%;
+    }
+
+    .BoxoSidebarItems {
+        position: sticky;
+        top: 2%;
+        font-weight: 500;
+    }
+
+}
+
+@media all and (min-width: 451px) and (max-width: 785px) {
+
+    .sidebarForHome6Content,
+    .BoxoSidebarItems,
+    .WithoutAccorionContainer {
+        display: none;
+    }
+
+    .ContanerForHome6Content {
+        flex-direction: column-reverse;
+    }
+
+    .middleSectionForHome6Content {
+        width: 90%;
+        margin: auto;
+    }
+
+    .rightBoxForForm {
+        width: 100%;
+    }
+
+    .AccorionContainer {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Box_for_form {
+        position: static;
+        padding: 5%;
+        width: 70%;
+    }
+}
+
+
+@media all and (min-width: 260px) and (max-width: 450px) {
+
+    .sidebarForHome6Content,
+    .BoxoSidebarItems,
+    .WithoutAccorionContainer {
+        display: none;
+    }
+
+    .ContanerForHome6Content {
+        flex-direction: column-reverse;
+    }
+
+    .middleSectionForHome6Content {
+        width: 90%;
+        margin: auto;
+    }
+
+    .rightBoxForForm {
+        width: 100%;
+    }
+
+    .AccorionContainer {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Box_for_form {
+        position: static;
+        padding: 5%;
+        width: 80%;
+    }
+}

@@ -1,0 +1,9 @@
+export const LOADING_TRANSACTION="transaction/LOADING_TRANSACTION";
+export const SUCCESS_TRANSACTION="transaction/SUCCESS_TRANSACTION";
+export const ERROR_TRANSACTION="transaction/ERROR_TRANSACTION";
+
+export const GET_TRANSACTION="transaction/GET_TRANSACTION";
+export const UPDATE_TRANSACTION="transaction/UPDATE_TRANSACTION";
+export const DELETE_TRANSACTION="transaction/DELETE_TRANSACTION";
+
+

@@ -1,0 +1,35 @@
+.toggle {
+    width: 60px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 15px;
+    cursor: pointer;
+    position: relative;
+}
+
+.toggle-handle {
+    width: 26px;
+    height: 26px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.toggle.on {
+    background-color: #3769c1;
+}
+
+.toggle.on .toggle-handle {
+    transform: translateX(30px);
+}
+
+.toggle.off {
+    background-color: #ccc;
+}
+
+.toggle.off .toggle-handle {
+    transform: translateX(0);
+}

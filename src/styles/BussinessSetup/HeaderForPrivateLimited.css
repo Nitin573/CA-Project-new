@@ -1,0 +1,127 @@
+.HeaderContainerForPrivateLimited {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2%;
+}
+
+.headerText_heading {
+    font-size: 400%;
+    display: flex;
+    text-align: left;
+    color: black;
+    font-weight: 500;
+}
+
+.headerText_headingline2 {
+    font-size: 150%;
+    display: flex;
+    text-align: left;
+    color: black;
+    font-weight: 400;
+}
+
+.secondBox_HeaderContainer {
+    width: 40%;
+    padding: 5%;
+    height: 100%;
+}
+
+.firsBox_HeaderContainer {
+    width: 60%;
+}
+
+.Box_for_form_inHeader {
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    border-radius: 10px;
+}
+
+@media all and (min-width: 1325px) and (max-width: 1510px) {
+
+    .headerText_heading {
+        font-size: 350%;
+    }
+
+    .headerText_headingline2 {
+        font-size: 130%;
+    }
+}
+
+
+@media all and (min-width: 1150px) and (max-width: 1324px) {
+
+    .headerText_heading {
+        font-size: 300%;
+    }
+
+    .headerText_headingline2 {
+        font-size: 120%;
+    }
+}
+
+
+@media all and (min-width: 950px) and (max-width: 1149px) {
+
+    .headerText_heading {
+        font-size: 260%;
+    }
+
+    .headerText_headingline2 {
+        font-size: 110%;
+    }
+}
+
+
+@media all and (min-width: 550px) and (max-width: 949px) {
+    .HeaderContainerForPrivateLimited {
+        flex-direction: column;
+    }
+
+    .headerText_heading {
+        font-size: 200%;
+    }
+
+    .headerText_headingline2 {
+        font-size: 110%;
+    }
+
+    .secondBox_HeaderContainer {
+        width: 80%;
+    }
+
+    .firsBox_HeaderContainer {
+        width: 90%;
+    }
+}
+
+@media all and (min-width: 250px) and (max-width: 549px) {
+    .HeaderContainerForPrivateLimited {
+        flex-direction: column;
+    }
+
+    .headerText_heading {
+        font-size: 170%;
+    }
+
+    .headerText_headingline2 {
+        font-size: 70%;
+    }
+
+    .secondBox_HeaderContainer {
+        width: 100%;
+    }
+
+    .firsBox_HeaderContainer {
+        width: 90%;
+    }
+
+    .Box_for_form_inHeader {
+        width: 80%;
+        margin: auto;
+    }
+}

@@ -1,0 +1,9 @@
+.NavHamburger{
+    font-size: 200%;
+}
+
+@media all and (min-width: 200px) and (max-width: 855px) {
+    .NavHamburger{
+        font-size: 300%;
+    }
+}
