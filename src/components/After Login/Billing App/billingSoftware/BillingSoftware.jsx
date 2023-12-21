@@ -32,6 +32,9 @@ const BillingSoftware = () => {
     const partyId = sessionStorage.getItem("selectedPartyId");
     console.log('Selected Party ID from localStorage, billing software:', partyId);
 
+    const handlePrint = () => {
+        window.print();
+    }
 
     const { getOneInvoice } = useSelector((store) => store.invoiceReducer);
     console.log(" BillingSoftware ~ getOneInvoice:", getOneInvoice)
@@ -93,12 +96,6 @@ const BillingSoftware = () => {
         const { name, value } = e.target;
 
         if (name == 'paidAmount' || name == 'dueAmount' || name == 'discount') {
-            const paidAmount = parseFloat(formData.paidAmount) || 0;
-            const dueAmount = parseFloat(formData.dueAmount) || 0;
-            const discount = parseFloat(value) || 0;  // Use the selected value directly
-            const subTotal = paidAmount + dueAmount;
-
-            const finalAmount = subTotal - discount;
 
             setFormData((prevData) => ({
                 ...prevData,
@@ -108,6 +105,14 @@ const BillingSoftware = () => {
                 discount: discount.toFixed(2),
                 finalAmount: finalAmount.toFixed(2),
             }));
+
+            const paidAmount = parseFloat(formData.paidAmount) || 0;
+            const dueAmount = parseFloat(formData.dueAmount) || 0;
+            const discount = parseFloat(value) || 0;  // Use the selected value directly
+            const subTotal = paidAmount + dueAmount;
+
+            const finalAmount = subTotal - subTotal*(value/100);
+
         } else {
             setFormData((prevData) => ({
                 ...prevData,
@@ -207,7 +212,7 @@ const BillingSoftware = () => {
                             <Flex justifyContent='space-between' alignItems='flex-end'>
                                 <Button width='30%' outline='none'>Close</Button>
                                 <Button width='30%' outline='none' onClick={submitInvoice}>Save</Button>
-                                <Button width='30%' outline='none'>Print</Button>
+                                <Button onClick={handlePrint} width='30%' outline='none'>Print</Button>
                             </Flex>
                         </Flex>
                         <Flex pt='4' px='2'
