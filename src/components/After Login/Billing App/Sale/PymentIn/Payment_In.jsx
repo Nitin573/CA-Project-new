@@ -54,6 +54,7 @@ const PaymentIn = () => {
 
   const handlePrintButtonClick = () => {
     // Handle printing logic here
+    window.print();
   };
 
   const handleExportToExcelButtonClick = () => {
@@ -165,7 +166,7 @@ const PaymentIn = () => {
                     <Th>Received</Th>
                     <Th>Balance</Th>
                     <Th>Total</Th>
-                    <Th>Print</Th>
+                    <Th >Print</Th>
                     <Th>Delete</Th>
                   </Tr>
                 </Thead>
@@ -238,7 +239,7 @@ const PaymentIn = () => {
                         />
                       </Td>
                       <Td>
-                        <Button fontSize={"10px"} bg={"blue.400"} onClick={() => handlePrint(item)}>Print</Button>
+                        <Button fontSize={"10px"} bg={"blue.400"} onClick={ handlePrintButtonClick}>Print</Button>
                       </Td>
                       <Td>
                         <Button fontSize={"10px"} bg={"red.500"} onClick={() => handleDelete(item)}>Delete</Button>

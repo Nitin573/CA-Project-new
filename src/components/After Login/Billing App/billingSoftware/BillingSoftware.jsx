@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Slidebar from '../Slidebar/Slidebar'
-import { Box, Button, Flex, IconButton, Input, Select, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, IconButton, Input, Select, Text, useDisclosure } from '@chakra-ui/react'
 import Company_name from '../Company_name/Company_name'
 import Sold_ShipTo from './Sold_ShipTo';
 import Invoice from './Invoice'
@@ -23,6 +23,7 @@ const Company = {
 }
 
 const BillingSoftware = () => {
+    const modal1 = useDisclosure();
     const { firmId } = useSelector((store) => store.FirmRegistration);
     const { invoiceId } = useParams();
     const dispatch = useDispatch();
@@ -210,7 +211,7 @@ const BillingSoftware = () => {
                                 </Flex>
                             </Flex>
                             <Flex justifyContent='space-between' alignItems='flex-end'>
-                                <Button width='30%' outline='none'>Close</Button>
+                                <Button onClick={modal1.onClose} width='30%' outline='none'>Close</Button>
                                 <Button width='30%' outline='none' onClick={submitInvoice}>Save</Button>
                                 <Button onClick={handlePrint} width='30%' outline='none'>Print</Button>
                             </Flex>
@@ -246,10 +247,6 @@ const BillingSoftware = () => {
                                     </Select>
 
                                 </Flex>
-
-
-
-
                                 <Flex mb="2">
                                     <Text flex="0 0 120px">Final Amount : </Text>
                                     <Input flex="1" ml="2" size="sm" readOnly value={formData?.finalAmount} />

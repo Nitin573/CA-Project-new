@@ -11,8 +11,6 @@ import {
 import { LIVE_URL2 } from "../config/Commen";
 import { toast } from "react-toastify";
 
-
-
 export const postInvoiceAction =(creds, firmId, token) => (dispatch) => {
   const headers = {
     "token": `${token}`
@@ -44,9 +42,10 @@ export const getInvoiceAction = (token , firmId) => (dispatch) => {
   }
   dispatch({ type: LOADING_INVOICE });
   try {
-    const url = `${LIVE_URL2}/firm/${firmId}/saleinvoice`
-    console.log('Invoice hi', url);
+    const url = `${LIVE_URL2}/invoice/firm/${firmId}/saleinvoice`
+    console.log("👲👲👲👲", firmId,  url);
     axios.get(url, { headers }).then((res) => {
+      // console.log('✅✅✅✅✅', res)
       dispatch({ type: GET_INVOICE, payload: res.data });
     });
   } catch (error) {

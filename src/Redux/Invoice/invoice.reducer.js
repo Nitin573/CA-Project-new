@@ -8,7 +8,6 @@ import { DELETE_INVOICE, ERROR_INVOICE, GET_INVOICE, GET_ONE_INVOICE, LOADING_IN
     getOneInvoice:[]
   };
   export const invoiceReducer = (state = initialState, { type, payload }) => {
-    console.log("🚀 ~ file: invoice.reducer.js:19 ~ invoiceReducer ~ payload:  update all data", payload)
     switch (type) {
       case LOADING_INVOICE: {
         return { ...state, loading: true, error: false };

@@ -37,6 +37,7 @@ const TableOptions = () => {
   const stockData = useSelector((store) => store.stockReducer.getStockData);
   const [selectedItems, setSelectedItems] = useState([]);
   const [selectedItemsData, setSelectedItemsData] = useState([]);
+  console.log(typeof (selectedItemsData))
   const userDetails =
     JSON.parse(sessionStorage.getItem("companyDetails")) || {};
   const { token } = userDetails;
@@ -49,9 +50,11 @@ const TableOptions = () => {
     modal1.onOpen();
   };
 
+
   const handleItemsAdd = () => {
     // Handle the logic for adding selected items
-    console.log("Selected Items:", selectedItems);
+    localStorage.setItem("selectedItems", JSON.stringify(selectedItemsData));
+    console.log("✅✅✅✅✅Selected Items:", selectedItems);
     console.log("Selected Items Data:", selectedItemsData);
     modal1.onClose();
   };

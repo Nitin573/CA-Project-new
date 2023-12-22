@@ -32,6 +32,7 @@ const AddPurchase = () => {
   const { firmId } = useSelector((store) => store.FirmRegistration);
   const dispatch = useDispatch();
   const [item, setItem] = useState(null)
+  const [taxType, setTaxType] = useState('IGST@0');
    
 
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ const AddPurchase = () => {
   };
 
   const addRow = () => {
-    const newItem = { id: rows.length + 1, itemName: '', itemCode: '', hsnCode: '', serialNo: '', batchNo: '', modelNo: '', expDate: '', mfgDate: '', mrp: '', size: '', qty: '', unit: '', priceUnit: '', rate: '', amount: 0 };
+    const newItem = { id: rows.length + 1, itemName: '', itemCode: '', hsnCode: '', serialNo: '', batchNo: '', modelNo: '', expDate: '', mfgDate: '', mrp: '', size: '', qty: '', unit: '', priceUnit: '', rate: '', amount: 0, taxPercentage: 0, taxAmount: 0 };
     setRows([...rows, newItem]);
   };
 
@@ -60,6 +61,15 @@ const AddPurchase = () => {
     return total.toFixed(2);
   };
 
+  const calculateTaxAmount = (row) => {
+    const taxPercentage = parseFloat(row.taxPercentage) || 0;
+    const amount = parseFloat(row.amount) || 0;
+    if (!isNaN(taxPercentage) && !isNaN(amount)) {
+      return ((amount * taxPercentage) / 100).toFixed(2);
+    }
+    return 0;
+  };
+
   const handleInputChange = (e, field, rowId) => {
     const { value } = e.target;
     const updatedRows = rows.map((row) => {
@@ -67,7 +77,56 @@ const AddPurchase = () => {
         return {
           ...row,
           [field]: value,
-          amount: (parseFloat(row.qty) * parseFloat(row.rate)).toFixed(2),
+          rate: (parseFloat(value) + parseFloat(row.taxAmount)).toFixed(2),
+          amount: (parseFloat(value) * parseFloat(row.qty)).toFixed(2),
+          taxAmount: calculateTaxAmount({
+            ...row,
+            [field]: value,
+          }),
+        };
+      }
+      return row;
+    });
+    setRows(updatedRows);
+  
+    // Update the item object with additional fields
+    const updatedItem = {
+      ...item,
+      item: updatedRows.map((row) => ({
+        itemName: row.itemName,
+        itemCode: row.itemCode,
+        hsnCode: row.hsnCode,
+        serialNo: row.serialNo,
+        batchNo: row.batchNo,
+        modelNo: row.modelNo,
+        expDate: row.expDate,
+        mfgDate: row.mfgDate,
+        mrp: row.mrp,
+        size: row.size,
+        qty: row.qty,
+        unit: row.unit,
+        priceUnit: row.priceUnit,
+        rate: row.rate,
+        amount: row.amount,
+        taxPercentage: row.taxPercentage,
+        taxAmount: row.taxAmount,
+      })),
+    };
+    setItem(updatedItem);
+  };
+
+  const handleTaxTypeChange = (e, rowId) => {
+    const { value } = e.target;
+    setTaxType(value);
+    const updatedRows = rows.map((row) => {
+      if (row.id === rowId) {
+        return {
+          ...row,
+          taxPercentage: parseFloat(value.split('@')[1]) || 0,
+          taxAmount: calculateTaxAmount({
+            ...row,
+            taxPercentage: parseFloat(value.split('@')[1]) || 0,
+          }),
         };
       }
       return row;
@@ -93,6 +152,8 @@ const AddPurchase = () => {
         priceUnit: row.priceUnit,
         rate: row.rate,
         amount: row.amount,
+        taxPercentage: row.taxPercentage,
+        taxAmount: row.taxAmount,
       })),
     };
     setItem(updatedItem);
@@ -120,17 +181,22 @@ const AddPurchase = () => {
           >
             <Heading size='md' color='gray.500'> Add Purchase Item </Heading>
             <Flex>
-              <Select
-                rightIcon={<ChevronDownIcon />}
-                placeholder='Bill No.'
+              <Text
+                mr='4'
+                textAlign='left'
+                mt='1'
+                fontWeight='semibold'
+              >
+                Bill No.:
+              </Text>
+              <Input
+                ml='4'
+                width='100%'
+                type='text'
+                placeholder='Enter Bill No.'
                 size='sm'
                 onChange={e => setItem(preVal => ({ ...preVal, billNo: e.target.value }))}
-              >
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-              </Select>
+              />
               <Input
                 ml='4'
                 width='100%'
@@ -208,11 +274,12 @@ const AddPurchase = () => {
                   <Th style={{ border: '1px solid gray' }}>EXP Date</Th>
                   <Th style={{ border: '1px solid gray' }}>MFG Date</Th>
                   <Th style={{ border: '1px solid gray' }}>MRP</Th>
-                  <Th style={{ border: '1px solid gray' }}>Size</Th>
+                  {/* <Th style={{ border: '1px solid gray' }}>Size</Th> */}
                   <Th style={{ border: '1px solid gray' }}>Qty</Th>
                   <Th style={{ border: '1px solid gray' }}>Unit</Th>
                   <Th style={{ border: '1px solid gray' }}>Price/Unit</Th>
-                  <Th style={{ border: '1px solid gray' }}>Rate</Th>
+                  <Th style={{ border: '1px solid gray' }}>Tax</Th>
+                  <Th style={{ border: '1px solid gray' }}>gstRate</Th>
                   <Th style={{ border: '1px solid gray' }}>Amount</Th>
                   <Th style={{ border: '1px solid gray' }}></Th>
                 </Tr>
@@ -313,7 +380,7 @@ const AddPurchase = () => {
                         }
                       />
                     </Td>
-                    <Td style={{ border: '1px solid gray' }}>
+                    {/* <Td style={{ border: '1px solid gray' }}>
                       <Input
                         variant='unstyled'
                         placeholder='Size'
@@ -322,7 +389,7 @@ const AddPurchase = () => {
                           handleInputChange(e, 'size', row.id)
                         }
                       />
-                    </Td>
+                    </Td> */}
                     <Td style={{ border: '1px solid gray' }}>
                       <Input
                         variant='unstyled'
@@ -354,9 +421,34 @@ const AddPurchase = () => {
                       />
                     </Td>
                     <Td style={{ border: '1px solid gray' }}>
+                      <Select
+                        variant='unstyled'
+                        value={taxType}
+                        onChange={(e) => handleTaxTypeChange(e, row.id)}
+                      >
+                        <option value='IGST@0'>IGST@0</option>
+                        <option value='GST@0'>GST@0</option>
+                        <option value='IGST@0.25%'>IGST@0.25%</option>
+                        <option value='GST@0.25%'>GST@0.25%</option>
+                        <option value='IGST@3%'>IGST@3%</option>
+                        <option value='GST@3%'>GST@3%</option>
+                        <option value='IGST@5%'>IGST@5%</option>
+                        <option value='GST@5%'>GST@5%</option>
+                        <option value='IGST@12%'>IGST@12%</option>
+                        <option value='GST@12%'>GST@12%</option>
+                        <option value='IGST@18%'>IGST@18%</option>
+                        <option value='GST@18%'>GST@18%</option>
+                        <option value='IGST@28%'>IGST@28%</option>
+                        <option value='GST@28%'>GST@28%</option>
+                      </Select>
+                    </Td>
+                    <Td style={{ border: '1px solid gray' }}>
+                      {calculateTaxAmount(row)}
+                    </Td>
+                    <Td style={{ border: '1px solid gray' }}>
                       <Input
                         variant='unstyled'
-                        placeholder='Enter Rate'
+                        placeholder='Enter gstRate'
                         value={row.rate}
                         onChange={(e) =>
                           handleInputChange(e, 'rate', row.id)

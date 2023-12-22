@@ -1,3 +1,4 @@
+// Firm.Reducer.js
 import {
   ERROR_FIRM_REGISTER,
   LOADING_FIRM_REGISTER,
@@ -12,8 +13,9 @@ const initialState = {
   Firm_registerData: [],
   error: false,
   get_firm_data: [],
-  firmId:"",
-  firmName:"",
+  firmId: "",
+  firmName: "",
+  selectedCompany: null, // Add selectedCompany field to the initial state
 };
 
 export const Firm_Reducer = (state = initialState, { type, payload }) => {
@@ -35,14 +37,15 @@ export const Firm_Reducer = (state = initialState, { type, payload }) => {
     case SUCCESS_GET_FIRM_REGISTER: {
       return { ...state, error: false, loading: false, get_firm_data: payload };
     }
-    case SET_FIRM_ID:{
-        return { ...state, error: false, loading: false, firmId: payload };
+    case SET_FIRM_ID: {
+      return { ...state, error: false, loading: false, firmId: payload };
     }
-
-    case SET_FIRM_NAME:{
+    case SET_FIRM_NAME: {
       return { ...state, error: false, loading: false, firmName: payload };
-  }
-
+    }
+    case 'SET_SELECTED_COMPANY': { // Add a new case to handle setting the selected company
+      return { ...state, selectedCompany: payload };
+    }
     default: {
       return state;
     }

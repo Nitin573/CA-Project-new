@@ -55,7 +55,7 @@ export const postPurchaseAction = (creds, token, firmId) => {
       };
       
       const url = `${LIVE_URL2}/addOrder/order/${firmId}`;
-      console.log(headers,creds,"creds");
+      console.log(firmId,"creds");
       const response = await axios.post(url, creds, { headers });
       
       console.log(response);

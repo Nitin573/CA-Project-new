@@ -17,7 +17,7 @@ import Slidebar from '../Slidebar/Slidebar';
 import Company_name from '../Company_name/Company_name';
 import { FiDownload, FiShare2 } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
-import { getInvoiceAction, postSaleInvoice } from '../../../../Redux/Invoice/invoice.action';
+import { getInvoiceAction } from '../../../../Redux/Invoice/invoice.action';
 import { Heading } from '@chakra-ui/react';
 import moment from 'moment';
 
@@ -40,7 +40,7 @@ const Invoice = ({ formData, setFormData }) => {
     return (
       <Box p="2">
         <Heading size="md" mb="4">
-          INVOICE
+          INVOICE 
         </Heading>
         {/* ... your existing invoice code ... */}
       </Box>
@@ -62,9 +62,9 @@ const Sale = () => {
         }
     ]
     const modal1 = useDisclosure()
-    const token = localStorage.getItem("token");
+    // const token = sessionStorage.getItem("token");
+    let token = JSON.parse(sessionStorage.getItem("companyDetails"));
     const { firmId } = useSelector((store) => store.FirmRegistration);
-    console.log("🚀 ~ file: Sale.jsx:41 ~ Sale ~ firmId:", firmId)
     const { getAllInvoice } = useSelector((store) => store.invoiceReducer);
 
     const dispatch = useDispatch();
@@ -75,7 +75,7 @@ const Sale = () => {
     };
 
     useEffect(() => {
-        dispatch(getInvoiceAction(token, firmId));
+        dispatch(getInvoiceAction(token.token, firmId));
     }, [firmId])
     return (
 

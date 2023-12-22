@@ -4,7 +4,7 @@ import { Table, Thead, Tbody, Tr, Th, Td, TableContainer } from '@chakra-ui/reac
 const ItemsTable = () => {
   // Fetch stored selected items from localStorage
   const storedSelectedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
-
+    console.log(storedSelectedItems)
   return (
     <TableContainer
       bg="white"
@@ -30,13 +30,13 @@ const ItemsTable = () => {
               <Td style={{ border: '1px solid lightgray' }}>{item.id}</Td>
               <Td style={{ border: '1px solid lightgray' }}>{item.name}</Td>
               <Td style={{ border: '1px solid lightgray' }}>{item.category || "-"}</Td>
-              <Td style={{ border: '1px solid lightgray' }}>{item.quantity}</Td>
-              <Td style={{ border: '1px solid lightgray' }}>{item.itemPrice}</Td>
+              <Td style={{ border: '1px solid lightgray' }}>{item.stockQuantity}</Td>
+              <Td style={{ border: '1px solid lightgray' }}>{item.price}</Td>
               <Td style={{ border: '1px solid lightgray' }}>{item.gst}%</Td>
               <Td style={{ border: '1px solid lightgray' }}>{item.totalPrice}</Td>
             </Tr>
           ))}
-        </Tbody>
+        </Tbody>  
       </Table>
     </TableContainer>
   );

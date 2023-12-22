@@ -13,7 +13,6 @@ const initialState = {
   saleInvoiceData: [],
 };
 export const saleInvoiceReducer = (state = initialState, { type, payload }) => {
-  console.log("hi from saleinvoice reducer payload", payload)
   switch (type) {
     case LOADING_SALE_INVOICE: {
       return { ...state, loading: true, error: false };
