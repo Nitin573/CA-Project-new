@@ -49,7 +49,7 @@ const FYData = [
   }
 ]
 
-const Company_name = (ppx) => {
+const Company_name = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isShown, setIsShown] = useState(false);
   const initialRef = React.useRef(null);
@@ -119,6 +119,7 @@ const Company_name = (ppx) => {
   const handleChange = (e) => {
     const { value } = e.target;
     const selectedFirm = get_firm_data.find((firm) => firm._id === value);
+    localStorage.setItem('companyInLocalStorage', selectedFirm.companyName)
     const selectedCompanyName = selectedFirm ? selectedFirm.companyName : "";
     const companyLogo = selectedFirm ? selectedFirm.companyLogo : "";
     setCompanyLogo(selectedFirm ? selectedFirm.companyLogo:"")
@@ -140,12 +141,12 @@ const Company_name = (ppx) => {
     dispatch(getFirmData(userDetails?.token));
   }, [firmId]);
   
-  
+  let companyInLocalStorage = localStorage.getItem("companyInLocalStorage");
   useEffect(() => {
     setTimeout(() => {
       if (get_firm_data?.length > 0) {
-        const selectedFirm = get_firm_data[0];
-        const selectedCompanyName = selectedFirm ? selectedFirm.companyName : "";
+        const selectedFirm =  get_firm_data[0];
+        const selectedCompanyName = selectedFirm ? companyInLocalStorage : "";
         setCompanyLogo(selectedFirm ? selectedFirm.companyLogo:"")
         setCompanyName(selectedCompanyName) // update heading
         setForm({ ...form, companyName: selectedCompanyName });  
@@ -235,7 +236,7 @@ const Company_name = (ppx) => {
                 height="28px"
                 borderRadius={"50%"}
               />
-              <Text ml='4' color='whiteAlpha.900' fontSize='24px'>{companyName}</Text>
+              <Text ml='4' color='whiteAlpha.900' fontSize='24px'>{ companyName}</Text>
             </Flex>
           </Heading>
           <HStack>
@@ -322,7 +323,7 @@ const Company_name = (ppx) => {
                   {get_firm_data?.map((el) => (
                     <option value={el._id} name={el.companyName}>{el.companyName}</option>
                   ))}
-                  {console.log('firm data', get_firm_data)}
+                  {console.log('✅✅✅firm data', get_firm_data)}
                 </Select>
                 <Select placeholder="Select financial year"
                 // onChange={handleChange}
