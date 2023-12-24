@@ -183,11 +183,11 @@ const AddPurchase = () => {
             <Flex>
               <Text
                 mr='4'
-                textAlign='left'
+                textAlign='right'
                 mt='1'
                 fontWeight='semibold'
               >
-                Bill No.:
+                BillNo:
               </Text>
               <Input
                 ml='4'
@@ -238,7 +238,7 @@ const AddPurchase = () => {
                   mt='1'
                   fontWeight='semibold'
                 >
-                  Phone Number :
+                  Phone Number:
                 </Text>
                 <Input
                   placeholder='Enter Contact Number'
@@ -421,26 +421,25 @@ const AddPurchase = () => {
                       />
                     </Td>
                     <Td style={{ border: '1px solid gray' }}>
-                      <Select
-                        variant='unstyled'
-                        value={taxType}
-                        onChange={(e) => handleTaxTypeChange(e, row.id)}
-                      >
-                        <option value='IGST@0'>IGST@0</option>
-                        <option value='GST@0'>GST@0</option>
-                        <option value='IGST@0.25%'>IGST@0.25%</option>
-                        <option value='GST@0.25%'>GST@0.25%</option>
-                        <option value='IGST@3%'>IGST@3%</option>
-                        <option value='GST@3%'>GST@3%</option>
-                        <option value='IGST@5%'>IGST@5%</option>
-                        <option value='GST@5%'>GST@5%</option>
-                        <option value='IGST@12%'>IGST@12%</option>
-                        <option value='GST@12%'>GST@12%</option>
-                        <option value='IGST@18%'>IGST@18%</option>
-                        <option value='GST@18%'>GST@18%</option>
-                        <option value='IGST@28%'>IGST@28%</option>
-                        <option value='GST@28%'>GST@28%</option>
-                      </Select>
+                    <select
+                     value={taxType}
+                      onChange={(e) => handleTaxTypeChange(e, row.id)}
+                    >
+                     <option value='IGST@0'>IGST@0</option>
+                     <option value='GST@0'>GST@0</option>
+                     <option value='IGST@0.25%'>IGST@0.25%</option>
+                     <option value='GST@0.25%'>GST@0.25%</option>
+                     <option value='IGST@3%'>IGST@3%</option>
+                     <option value='GST@3%'>GST@3%</option>
+                     <option value='IGST@5%'>IGST@5%</option>
+                     <option value='GST@5%'>GST@5%</option>
+                     <option value='IGST@12%'>IGST@12%</option>
+                     <option value='GST@12%'>GST@12%</option>
+                     <option value='IGST@18%'>IGST@18%</option>
+                     <option value='GST@18%'>GST@18%</option>
+                     <option value='IGST@28%'>IGST@28%</option>
+                     <option value='GST@28%'>GST@28%</option>
+                      </select>
                     </Td>
                     <Td style={{ border: '1px solid gray' }}>
                       {calculateTaxAmount(row)}

@@ -310,7 +310,7 @@ const Items = () => {
                   {hasValidationError(errors, "name") ? (<span className="has-cust-error-white">{validationError(errors, "name")}</span>) : null}
 
                 </FormControl>
-                <FormControl margin={"10px"}>
+                {/* <FormControl margin={"10px"}>
                   <FormLabel>Item ID :</FormLabel>
                   <Input
                     type="text"
@@ -322,7 +322,7 @@ const Items = () => {
                   />
                   {hasValidationError(errors, "firmId") ? (<span className="has-cust-error-white">{validationError(errors, "firmId")}</span>) : null}
 
-                </FormControl>
+                </FormControl> */}
               </Flex>
               <Flex>
                 <FormControl margin={"10px"}>
