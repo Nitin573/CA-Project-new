@@ -17,17 +17,22 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+
+import edit from "../../../assets/edit.svg";
+import search3 from "../../../assets/search3.png";
+import ylogo from "../../../assets/ylogo.jpg";
+import search2 from "../../../assets/search2.png";
+import user from "../../../assets/user.svg";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../../../firebase";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getFirmData, setFirmId, setFirmName } from "../../../../Redux/Firm/Firm.Action";
-import { FaUserCircle } from "react-icons/fa";
-import search2 from "../../../assets/search2.png";
-import ylogo from "../../../assets/ylogo.jpg";
-import search3 from "../../../assets/search3.png";
+import { FaUser, FaUserCircle } from "react-icons/fa";
+
 
 const FYData = [
   {
@@ -50,13 +55,16 @@ const Company_name = (props) => {
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
   const [companyName, setCompanyName] = useState('');
-  const [companyLogo, setCompanyLogo] = useState('');
+  const [companylog, setCompanyLogo] = useState('');
 
   const handleClick = (event) => {
     setIsShown((current) => !current);
   };
 
+  const [moreDetails, setMoreDetails] = useState(false);
+
   const [images, setImages] = useState([]);
+
   const [imageURL, setImageURL] = useState("");
 
   const [form, setForm] = useState({
@@ -98,7 +106,7 @@ const Company_name = (props) => {
           await getDownloadURL(uploadTask.snapshot.ref).then((url) => {
             count++;
 
-            if (count === images.length) {
+            if (count == images.length) {
               setImageURL(url);
             }
           });
@@ -107,13 +115,14 @@ const Company_name = (props) => {
     }
   };
 
+
   const handleChange = (e) => {
     const { value } = e.target;
     const selectedFirm = get_firm_data.find((firm) => firm._id === value);
     localStorage.setItem('companyInLocalStorage', selectedFirm.companyName)
     const selectedCompanyName = selectedFirm ? selectedFirm.companyName : "";
     const companyLogo = selectedFirm ? selectedFirm.companyLogo : "";
-    setCompanyLogo(selectedFirm ? selectedFirm.companyLogo : "")
+    setCompanyLogo(selectedFirm ? selectedFirm.companyLogo:"")
     setCompanyName(selectedCompanyName) // update heading
     setForm({ ...form, companyName: selectedCompanyName });
 
@@ -121,31 +130,39 @@ const Company_name = (props) => {
     dispatch(setFirmName(selectedCompanyName));
   };
 
-  useEffect(() => {
-    dispatch(getFirmData(userDetails?.token));
-  }, []);
-
-  const userDetails = JSON.parse(sessionStorage.getItem("companyDetails")) ? JSON.parse(sessionStorage.getItem("companyDetails")) : null;
-  let companyInLocalStorage = localStorage.getItem("companyInLocalStorage");
-
-  useEffect(() => {
-    if (get_firm_data?.length > 0) {
-      const selectedFirm = get_firm_data.find((firm) => firm._id === firmId);
-      const selectedCompanyName = selectedFirm ? selectedFirm.companyName : "";
-      const companyLogo = selectedFirm ? selectedFirm.companyLogo : "";
-      setCompanyLogo(companyLogo);
-      setCompanyName(selectedCompanyName); // update heading
-      setForm({ ...form, companyName: selectedCompanyName });
-    }
-  }, [firmId, get_firm_data]);
 
   useEffect(() => {
     handleImages();
   }, [images]);
 
+  const userDetails = JSON.parse(sessionStorage.getItem("companyDetails")) ? JSON.parse(sessionStorage.getItem("companyDetails")) : null
+
+  useEffect(() => {
+    dispatch(getFirmData(userDetails?.token));
+  }, [firmId]);
+  
+  let companyInLocalStorage = localStorage.getItem("companyInLocalStorage");
+  useEffect(() => {
+    setTimeout(() => {
+      if (get_firm_data?.length > 0) {
+        const selectedFirm =  get_firm_data[0];
+        const selectedCompanyName = selectedFirm ? companyInLocalStorage : "";
+        setCompanyLogo(selectedFirm ? selectedFirm.companyLogo:"")
+        setCompanyName(selectedCompanyName) // update heading
+        setForm({ ...form, companyName: selectedCompanyName });  
+        dispatch(setFirmId(get_firm_data[0]?._id));
+        dispatch(setFirmName(selectedCompanyName));
+      }
+      dispatch(getFirmData(userDetails?.token));
+    }, 1000);
+  }, [get_firm_data?.length])
+
   return (
     <>
-      <Box>
+      {" "}
+      <Box
+      // position={"sticky"} top="132px" zIndex={"10000"}
+      >
         <Flex
           gap={"20px"}
           justifyContent={"right"}
@@ -161,7 +178,8 @@ const Company_name = (props) => {
                 fontWeight={"bold"}
                 m={"auto"}
               >
-                ADD SALE +
+                {" "}
+                ADD SALE +{" "}
               </Text>
             </Button>
           </Link>
@@ -177,6 +195,10 @@ const Company_name = (props) => {
               </Text>
             </Button>
           </Link>
+          {/* <Link to="/Inventiry_Home">
+                    <Button bg={"blue.500"} color={"white"}><Text fontSize={{ base: "8px", md: "12px", lg: "15px" }}
+                        color={"black"} fontWeight={"bold"} m={"auto"}>ADD INVOICE +</Text></Button>
+                </Link> */}
         </Flex>
         <Flex
           margin={"auto"}
@@ -189,6 +211,8 @@ const Company_name = (props) => {
           pt='1.5'
         >
           <HStack style={{ margin: "10px" }} height="100%">
+            {/* <Input type="search" placeholder="search" value={""} onChange={""} marginRight={"10px"} /> */}
+            {/* <Button style={{ backgroundColor: "orange" }} onClick={() => ""}>Search</Button> */}
             <Image
               src={search2}
               width="25px"
@@ -207,22 +231,47 @@ const Company_name = (props) => {
           >
             <Flex pt='1'>
               <Image
-                src={companyLogo ? companyLogo : ylogo}
+                src={ companylog ? companylog :ylogo}
                 width="28px"
                 height="28px"
                 borderRadius={"50%"}
               />
-              <Text ml='4' color='whiteAlpha.900' fontSize='24px'>{companyName}</Text>
+              <Text ml='4' color='whiteAlpha.900' fontSize='24px'>{ companyName}</Text>
             </Flex>
           </Heading>
           <HStack>
+            {/* <HStack justifySelf={"end"} cursor={"pointer"} onClick={onOpen}>
+              <Image
+                src={edit}
+                backgroundColor={"white"}
+                width="20px"
+                padding='4px'
+                borderRadius={"50%"}
+              ></Image>
+              <Text
+                color={"white"}
+                display={{ lg: "flex", md: "flex", base: "none" }}
+              >
+                Edit
+              </Text>
+            </HStack> */}
             <Link to={"/Profile"}>
               <Flex justifySelf={"end"} cursor={"pointer"} alignItems='center' mr='4'>
                 <FaUserCircle size='24px' title="Profile" />
+                {/* <Text
+                  color={"white"}
+                  display={{ lg: "flex", md: "flex", base: "none" }}
+                  ml='2'
+                  pt='3'
+                  fontSize='md'
+                >
+                  Profile
+                </Text> */}
               </Flex>
             </Link>
           </HStack>
         </Flex>
+        {/* Search bar */}
 
         {isShown && (
           <HStack
@@ -238,6 +287,7 @@ const Company_name = (props) => {
               marginRight={"10px"}
               backgroundColor="rgb(255,185,29)"
             />
+            {/* <Button style={{ backgroundColor: "orange" }} onClick={() => ""}>Search</Button> */}
             <Image
               src={search3}
               width="30px"
@@ -247,6 +297,8 @@ const Company_name = (props) => {
             ></Image>
           </HStack>
         )}
+
+        {/* edit company */}
 
         <Modal
           initialFocusRef={initialRef}
@@ -271,8 +323,11 @@ const Company_name = (props) => {
                   {get_firm_data?.map((el) => (
                     <option value={el._id} name={el.companyName}>{el.companyName}</option>
                   ))}
+                  {console.log('✅✅✅firm data', get_firm_data)}
                 </Select>
-                <Select placeholder="Select financial year">
+                <Select placeholder="Select financial year"
+                // onChange={handleChange}
+                >
                   {FYData?.map((FY) => (
                     <option>{FY.year}</option>
                   ))}
